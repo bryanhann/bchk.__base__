@@ -1,0 +1,41 @@
+#!/bin/bash
+
+path=${BCH_HACK_APPS}
+stem=
+
+for ii in $*; do
+    stem=${stem}/${ii}
+    path=${path}/${ii}
+    [ -e ${path}  ] || {
+        echo bad command: [$stem]
+        exit
+    }
+done
+long () {
+    [ -f ${1}/usage.long ] && cat ${1}/usage.long
+}
+short () {
+    [ -f ${1}/usage.short ] && printf '\t-- ' && cat ${1}/usage.short
+}
+
+maybe () {
+    local name=$(basename $1)
+    local main=${1}/main
+    local doc=${1}/usage.short
+    [ -f ${main} ] || return
+    printf "    ${name}\t\t"
+    [ -f ${doc} ] && cat ${doc} || echo
+
+}
+echo USAGE:
+echo "    " bch-hack $*
+echo SUBCOMMANDS:
+for ii in $(ls ${path}); do
+    maybe ${path}/${ii}
+    continue
+    [ -f ${path}/${ii}/main ] || continue
+    printf "    $ii"
+    [ -f ${path}/${ii}/usage.short ] && {}cat  ${path}/${ii}/usage.short || echo
+done
+long ${path}
+echo

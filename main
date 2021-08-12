@@ -1,0 +1,23 @@
+#!/bin/bash
+
+which .hackbin > /dev/null || { export PATH=${PATH}:${BCH_HACK_ROOT}/bin ; }
+export BCH_HACK_APPS=${BCH_HACK_ROOT}/apps
+
+case .${1} in
+    .|.-h|.--help)
+        shift
+        arf-help $*
+        exit
+        ;;
+esac
+
+#$cmd=$1
+#shift
+
+${BCH_HACK_APPS}/main $*
+#[ -f ${BCH_HACK_APPS}/${cmd}/main ] || echo $0: unknown subcommand: [$cmd]
+#[ -f ${BCH_HACK_APPS}/${cmd}/main ] || exit
+
+#${BCH_HACK_APPS}/${cmd}/main $*
+#echo --[$0] [$*]
+

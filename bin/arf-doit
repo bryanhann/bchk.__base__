@@ -1,0 +1,21 @@
+#!/bin/bash
+
+arf_handle () {
+    local base=$(dirname $1)
+    local name=${2}
+    local main=${base}/${name}/main
+    local this=bch-hack/$(grealpath --relative-to ${BCH_HACK_ROOT} ${base})
+    local def=${base}/default.sh
+    local und="${this}: undefined subcommand '${name}'"
+    local mis="${this}: missing argument '${name}'"
+    shift
+    shift
+
+    [ "${name}" = ""    ] && [   -f "${def}" ] && { ${def}        ; return $?; }
+    [ "${name}" = ""    ] && [ ! -f "${def}" ] && { echo ${mis}   ; return $?; }
+    [   -f ${main}      ] && [ . = .         ] && { ${main} $*    ; return $?; }
+    [ ! -f ${main}      ] && [ . = .         ] && { echo ${und}   ; return $?; }
+}
+arf_handle $*
+
+

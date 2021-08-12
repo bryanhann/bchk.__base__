@@ -1,0 +1,15 @@
+#!/do/not/exec/sh
+export BCH_HACK_ROOT=${PWD}
+
+main=${PWD}/main
+link=${HOME}/.local/bin/bch-arf
+
+mkdir -p   ${HOME}/.local/bin
+rm         ${link}
+echo '$BCH_HACK_ROOT/main $*'  >  ${link}
+chmod +x   ${link}
+
+cd ./source.d
+for script in $(/bin/ls [0-9]* | sort); do
+    _myborg source  $PWD/$script
+done

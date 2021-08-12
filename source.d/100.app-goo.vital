@@ -1,0 +1,4 @@
+#!/bin/sh
+export BCH_GOO_DRIVE=~/.goo
+[ -e ${BCH_GOO_DRIVE} ] || ln -s ~/Google\ Drive/ ${BCH_GOO_DRIVE}
+
