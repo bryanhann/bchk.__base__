@@ -1,5 +1,6 @@
 #!/bin/bash
 
+prog=bch-arf
 path=${BCH_HACK_APPS}
 stem=
 
@@ -28,7 +29,8 @@ maybe () {
 
 }
 echo USAGE:
-echo "    " bch-hack $*
+echo "    $prog $*" 
+#bch-hack $*
 echo SUBCOMMANDS:
 for ii in $(ls ${path}); do
     maybe ${path}/${ii}
