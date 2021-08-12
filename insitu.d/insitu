@@ -1,5 +1,6 @@
 #!/do/not/exec/sh
 export BCH_HACK_ROOT=${PWD}
+export BCH_HACK_APPS=${BCH_HACK_ROOT}/apps
 
 main=${PWD}/main
 link=${HOME}/.local/bin/bch-arf
