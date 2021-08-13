@@ -1,17 +1,22 @@
 #!/bin/bash
-
 which .hackbin > /dev/null || { export PATH=${PATH}:${BCH_HACK_ROOT}/bin ; }
 
-#export BCH_HACK_APPS=${BCH_HACK_ROOT}/apps
-
 case .${1} in
-    .|.-h|.--help)
+    .|.-h|.--help|.help)
         shift
         arf-help $*
         exit
         ;;
+    .--arf)
+        shift
+        arf-$*
+        exit
+        ;;
+    *)
+        ${BCH_HACK_APPS}/main $*
+        exit $?
+        ;;
 esac
 
 
-${BCH_HACK_APPS}/main $*
 
