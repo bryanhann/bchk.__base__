@@ -1,13 +1,13 @@
 #!/do/not/exec/sh
-export BCH_HACK_ROOT=${PWD}
-export BCH_HACK_APPS=${BCH_HACK_ROOT}/apps
-export BCH_HACK_NAME=bchk
+export BCHK_ROOT=${PWD}
+export BCHK_APPS=${BCHK_ROOT}/apps
+export BCHK_NAME=bchk
 main=${PWD}/main
-link=${HOME}/.local/bin/${BCH_HACK_NAME}
+link=${HOME}/.local/bin/${BCHK_NAME}
 
 mkdir -p   ${HOME}/.local/bin
 rm         ${link}
-echo '$BCH_HACK_ROOT/main $*'  >  ${link}
+echo '$BCHK_ROOT/main $*'  >  ${link}
 chmod +x   ${link}
 
 cd ./source.d

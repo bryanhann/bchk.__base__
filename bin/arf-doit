@@ -4,7 +4,7 @@ arf_handle () {
     local base=$(dirname $1)
     local name=${2}
     local main=${base}/${name}/main
-    local this=bch-hack/$(grealpath --relative-to ${BCH_HACK_ROOT} ${base})
+    local this=bch-hack/$(grealpath --relative-to ${BCHK_ROOT} ${base})
     local def=${base}/default.sh
     local und="${this}: undefined subcommand '${name}'"
     local mis="${this}: missing argument '${name}'"

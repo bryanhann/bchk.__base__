@@ -1,5 +1,5 @@
 #!/bin/bash
-which .hackbin > /dev/null || { export PATH=${PATH}:${BCH_HACK_ROOT}/bin ; }
+which .hackbin > /dev/null || { export PATH=${PATH}:${BCHK_ROOT}/bin ; }
 
 case .${1} in
     .|.-h|.--help|.help)
@@ -13,7 +13,7 @@ case .${1} in
         exit
         ;;
     *)
-        ${BCH_HACK_APPS}/main $*
+        ${BCHK_APPS}/main $*
         exit $?
         ;;
 esac

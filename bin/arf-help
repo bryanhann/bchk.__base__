@@ -12,14 +12,14 @@ maybe () {
 
 main () {
     stem=
-    path=${BCH_HACK_APPS}
+    path=${BCHK_APPS}
     for ii in $*; do
         stem=${stem}/${ii}
         path=${path}/${ii}
         [ -e ${path}  ] || { echo bad command: [$stem]; return 87; }
     done
     echo USAGE:
-    echo "    ${BCH_HACK_NAME} $* [SUBCOMMAND]" 
+    echo "    ${BCHK_NAME} $* [SUBCOMMAND]" 
     echo
     [ ! -e ${path}/.nosubs ] && { 
         echo SUBCOMMANDS:
