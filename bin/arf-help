@@ -10,17 +10,6 @@ maybe () {
 
 }
 
-usage () {
-    path=$1
-    echo USAGE:
-    echo "    ${BCH_HACK_NAME} $*" 
-    echo SUBCOMMANDS:
-    for ii in $(ls ${path}); do
-        maybe ${path}/${ii}
-    done
-    [ -f ${path}/usage.long ] && cat ${path}/usage.long
-}
-
 main () {
     stem=
     path=${BCH_HACK_APPS}
@@ -29,7 +18,13 @@ main () {
         path=${path}/${ii}
         [ -e ${path}  ] || { echo bad command: [$stem]; return 87; }
     done
-    usage ${path}
+    echo USAGE:
+    echo "    ${BCH_HACK_NAME} $*" 
+    echo SUBCOMMANDS:
+    for ii in $(ls ${path}); do
+        maybe ${path}/${ii}
+    done
+    [ -f ${path}/usage.long ] && cat ${path}/usage.long
 }
 
 main $*
