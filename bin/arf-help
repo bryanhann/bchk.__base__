@@ -20,6 +20,7 @@ main () {
     done
     echo USAGE:
     echo "    ${BCH_HACK_NAME} $* [SUBCOMMAND]" 
+    echo
     echo SUBCOMMANDS:
     for ii in $(ls ${path}); do
         maybe ${path}/${ii}

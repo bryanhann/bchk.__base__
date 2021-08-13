@@ -1,0 +1,14 @@
+#!/bin/bash
+
+[ -f ./main ] || {
+    echo cannot run in a non app folder.
+    exit
+}
+folder=./$1
+[ -d $folder ] && echo $folder exists && exit
+mkdir ${folder}
+echo 'arf-doit $0 $*' > ${folder}/main
+chmod +x ${folder}/main
+echo '[short usage here]' > ${folder}/usage.short
+printf "USAGE:\n    [long usage here]\n" > ${folder}/usage.long
+
