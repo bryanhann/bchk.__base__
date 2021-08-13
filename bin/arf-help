@@ -21,10 +21,12 @@ main () {
     echo USAGE:
     echo "    ${BCH_HACK_NAME} $* [SUBCOMMAND]" 
     echo
-    echo SUBCOMMANDS:
-    for ii in $(ls ${path}); do
-        maybe ${path}/${ii}
-    done
+    [ ! -e ${path}/.nosubs ] && { 
+        echo SUBCOMMANDS:
+        for ii in $(ls ${path}); do
+            maybe ${path}/${ii}
+        done
+    }
     [ -f ${path}/usage.long ] && cat ${path}/usage.long
 }
 
