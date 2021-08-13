@@ -1,7 +1,7 @@
 
 HELP:
-    [bch-hack help foo] will give help on subcommand foo.
-    [bch-hack help foo bar] will give help on subcommand foo bar.
+    [bchk help foo] will give help on subcommand foo.
+    [bchk help foo bar] will give help on subcommand foo bar.
 
 ABOUT:
     This program is a front end to allow the quick development

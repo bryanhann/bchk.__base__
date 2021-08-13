@@ -1,7 +1,7 @@
 #!/do/not/exec/sh
 export BCH_HACK_ROOT=${PWD}
 export BCH_HACK_APPS=${BCH_HACK_ROOT}/apps
-export BCH_HACK_NAME=bch-hack
+export BCH_HACK_NAME=bchk
 main=${PWD}/main
 link=${HOME}/.local/bin/${BCH_HACK_NAME}
 
