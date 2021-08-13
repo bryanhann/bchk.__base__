@@ -1,0 +1,11 @@
+
+HELP:
+    [bch-hack help foo] will give help on subcommand foo.
+    [bch-hack help foo bar] will give help on subcommand foo bar.
+
+ABOUT:
+    This program is a front end to allow the quick development
+    and deployment of little software tools. Development takes
+    place in the repository rooted at [$BCH_HACK_ROOT]. An app
+    is a subdirectory of [$BCH_HACK_ROOT/apps] which contains
+    an executable [main] script.
