@@ -1,0 +1,10 @@
+#!/bin/bash
+target=$1
+store=./$RANDOM.remove.me
+for ii in $(find .); do 
+    [ -f $ii ] || continue
+    cat $ii | grep "$target" > $store || continue
+    echo --$ii
+    cat $store
+done
+rm *.remove.me

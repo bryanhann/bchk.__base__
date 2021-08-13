@@ -1,0 +1,11 @@
+USAGE:
+    CMD pattern
+    
+    Search directory tree rooted at [.] for files containing pattern.
+    Output is repeated blocks of
+        """
+        ---------- ./path/to/file
+        [line1]
+        [line2] ...
+        """
+    where the lines are the result of grepping the file with the pattern.
