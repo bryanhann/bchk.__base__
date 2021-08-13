@@ -1,0 +1,122 @@
+#!/usr/local/bin/python3
+from pprint import pprint
+import sys
+import datetime
+from pathlib import Path
+from dataclasses import dataclass
+FORMAT_IMG='IMG_%Y%m%d_%H%M%S%f.jpg'
+
+root=Path(sys.argv[1])
+
+@dataclass
+class DT:
+    @classmethod
+    def DT4stamp(cls,s):
+        return DT( s[0:4] , s[4:6] , s[6:8] , s[9:11] , s[11:13] , s[13:15] , s[15:] )
+
+    yyyy: str
+    mm: str
+    dd: str
+    hh: str
+    MM: str
+    ss: str
+    ms: str
+    def __repr__(s):
+        return '%s-%s-%s-T-%s:%s:%s:%s' % (s.yyyy,s.mm,s.dd,s.hh,s.MM,s.ss,s.ms)
+    def dateT(s):
+        return s.yyyy + s.mm + s.dd + 'T'
+class PureVirtual(Exception):
+    pass
+
+class Path_ABC:
+    def stat(self):
+        status = 'stashed:%s' % self.is_dateStashed()
+        return repr(self) + ' [%s]' % status
+        #& (self(), self.__class__.__name, self.is_dateStashed() )# + ' ' + parent.dateT()
+
+    @classmethod
+    def verify(cls,path): return True
+    def __init__(self,path): self._mypath=Path(path)
+    def __call__(self): return self._mypath
+    def __repr__(self): return self.__class__.__name__ + ':' + repr(self())
+    def stamp4name(self): return '________T_________'
+    def myparent(self):
+        return mypath(self().parent)
+    def dt(s):
+        s = s.stamp4name()
+        return DT( s[0:4] , s[4:6] , s[6:8] , s[9:11] , s[11:13] , s[13:15] , s[15:] )
+    def dateT(self): return self.stamp4name().split('T')[0] + 'T'
+    def stash4dateT(self): return Path(self().parent/self.dateT())
+    def is_dateStashed(self):
+        return self.dateT() == self.myparent().dateT()
+
+class Path_IMG(Path_ABC):
+    def mydt(self):
+        print( self().name )
+        return datetime.datetime.strptime( self().name,  'IMG_%Y%m%d_%H%M%S%f.jpg' )
+    @classmethod
+    def verify(cls, path):
+        name=path.name
+        ret = True
+        ret = ret and  name.startswith('IMG_')
+        ret = ret and  name.endswith('.jpg')
+        ret = ret and  path.is_file()
+        return ret
+    def stamp4name(self):
+        _, d, t = self().stem.split('_')
+        return d + 'T' + t
+
+
+def alldigits(string):
+    for ch in string:
+        if not ch in '0123456789_':
+            return False
+    return True
+
+class Path_Stash(Path_ABC):
+    @classmethod
+    def verify(cls, path):
+        parts=path.stem.split('-')[0].split('T')
+        if not len(parts) == 2: return False
+        if not alldigits(parts[0]): return False
+        if not alldigits(parts[1]): return False
+        return True
+class Path_DateStash(Path_Stash):
+    @classmethod
+    def verify(cls, path):
+        stem=path.stem
+        ret = True
+        ret = ret and len(stem) == 9
+        ret = ret and stem.endswith('T')
+        ret = ret and alldigits(stem[:-1])
+        return ret
+    def stamp4name(self):
+        return self().stem + '_________'
+
+
+
+KLASSES = [Path_DateStash,Path_IMG, Path_ABC]
+
+def mypath(path):
+    for klass in KLASSES:
+        if klass.verify(path):
+            return klass(path)
+    assert 0
+
+def main():
+    paths = root.glob('*/*')
+    paths = map(mypath, paths)
+    for path in paths:
+        if path.__class__ == Path_ABC:
+            continue
+        stash=path.stash4dateT()
+        print(path)
+        print(path.stat())
+        print()
+        if path.__class__ == Path_IMG:
+            dt=path.mydt()
+            print( repr(dt) )
+if __name__ == '__main__':
+
+    main()
+

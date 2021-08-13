@@ -1,0 +1,10 @@
+#!/bin/sh
+[ -e ~/.gd ] || ln -s ~/Google\ Drive/ ~/.gd
+export SYNC=~/.gd/sync
+
+./p $SYNC
+
+#for path in $(ls ${SYNC}/IMG_*); do
+#    echo $path
+#    ./p $path
+#done
