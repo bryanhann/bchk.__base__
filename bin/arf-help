@@ -5,8 +5,8 @@ maybe () {
     local main=${1}/main
     local doc=${1}/usage.short
     [ -f ${main} ] || return
-    printf "    ${name}\t\t"
-    [ -f ${doc} ] && cat ${doc} || echo
+    printf "   %-1s ${name}\t"
+    [ -f ${doc} ] && printf ': ' && cat ${doc} || echo
 
 }
 
@@ -19,7 +19,7 @@ main () {
         [ -e ${path}  ] || { echo bad command: [$stem]; return 87; }
     done
     echo USAGE:
-    echo "    ${BCH_HACK_NAME} $*" 
+    echo "    ${BCH_HACK_NAME} $* [SUBCOMMAND]" 
     echo SUBCOMMANDS:
     for ii in $(ls ${path}); do
         maybe ${path}/${ii}
