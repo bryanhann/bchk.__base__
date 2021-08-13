@@ -1,16 +1,39 @@
 #!/do/not/exec/sh
+
+
+arf_link () {
+    mkdir -p $(dirname $1)
+    echo "${2}" > ${1}
+    chmod +x ${1}
+}
+
+arf_insitu () {
+    [ ! -d "$1" ] && echo arf_insitu: [$1] not a dir && return
+    [ "$2" = "" ] && echo arf_insitu: [$2] not a cmd && return
+    >/dev/null pushd $1 ; shift; $*; >/dev/null popd
+}
+
 export BCHK_ROOT=${PWD}
 export BCHK_APPS=${BCHK_ROOT}/apps
 export BCHK_NAME=bchk
-main=${PWD}/main
-link=${HOME}/.local/bin/${BCHK_NAME}
+export BCHK_LBIN=${HOME}/.local/bin
 
-mkdir -p   ${HOME}/.local/bin
-rm         ${link}
-echo '$BCHK_ROOT/main $*'  >  ${link}
-chmod +x   ${link}
 
-cd ./source.d
+arf_link ${BCHK_LBIN}/${BCHK_NAME}  '${BCHK_ROOT}/main $*'
+
+arf_activate_app () {
+    [ -f $1/.insitu/activate ] || echo arf_activate_app: skipping $1
+    [ -f $1/.insitu/activate ] || return
+    echo arf_activate_map: activating $1
+    arf_insitu ${1}/.insitu source ./activate
+}
+
+for app in $(ls ${BCHK_APPS}); do
+    arf_activate_app ${BCHK_APPS}/${app}
+    #arf_insitu ${BCHK_APPS}/${app}/.insitu source ./activate
+done
+
+cd ${BCHK_ROOT}/source.d
 for script in $(/bin/ls [0-9]* | sort); do
     _myborg source  $PWD/$script
 done
