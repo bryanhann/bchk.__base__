@@ -1,0 +1,11 @@
+#!/bin/bash
+#arf-doit $0 $*
+
+# list any git dirs that need attention.
+
+for xx in $(find . | grep ".git$" ); do
+    dd=$(dirname $xx)
+    pushd ${dd} > /dev/null
+    [ ! -z "$(git status --short)" ] && echo $PWD
+    popd > /dev/null
+done

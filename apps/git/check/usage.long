@@ -1,0 +1,4 @@
+ABOUT:
+     list any git dirs that need attention.
+
+     Takes no arguments. Search starts from working directory.
