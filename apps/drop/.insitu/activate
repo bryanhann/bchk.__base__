@@ -1,0 +1,3 @@
+#/do/not/eval/sh
+export BCHK_APP_DROP_ROOT=$(dirname ${PWD})
+export BCHK_APP_DROP_BOX=~/.box

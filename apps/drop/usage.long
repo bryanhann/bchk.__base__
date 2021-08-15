@@ -1,0 +1,7 @@
+ABOUT:
+    Utilities to handle a cloud drop box (Google Drive, DropBox, etc.)
+    They are agnostic about your host. They presume only that there is
+    a remote folder mounted on your filesystem at the path specified
+    by the exported variable:
+
+        [$BCHK_APPS_DROP_BOX]
