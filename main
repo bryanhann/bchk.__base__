@@ -9,8 +9,7 @@ case .${1} in
         ;;
     .--arf)
         shift
-        arf-$*
-        exit
+        [ "$1" == "" ] && ls ${BCHK_ROOT}/bin || arf-$*
         ;;
     *)
         ${BCHK_APPS}/main $*
