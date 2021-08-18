@@ -1,2 +1,2 @@
-bchk drop check || exit
-ls ${BCHK_CFG_DROP_BOX}
+bchk drop check 2> /dev/null|| exit
+ls -A1Fl ${BCHK_CFG_DROP_BOX}/
