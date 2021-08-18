@@ -1,0 +1,3 @@
+#!/bin/bash
+echo "$(tput bold)$(tput setaf 15)$(tput setab 4)  INFO  $(tput sgr0) $*" >&2; 
+exit 99
