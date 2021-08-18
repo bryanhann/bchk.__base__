@@ -1,30 +1,27 @@
 #!/do/not/exec/sh
 
-__bchk_activate_app () {
-    [ -f $1/.insitu/activate ] || echo arf_activate_app: skipping $1
-    [ -f $1/.insitu/activate ] || return
-    echo arf_activate_map: activating $1
-    #arf_insitu ${1}/.insitu source ./activate
-    [ ! -d "$1" ] && echo arf_insitu: [$1] not a dir && return
-    [ "$2" = "" ] && echo arf_insitu: [$2] not a cmd && return
-    >/dev/null pushd $1 ; shift; $*; >/dev/null popd
+echo SOURCING $PWD/activate
+
+bchk_activate () {
+    insitu=${1}/.insitu
+    [ -d ${insitu} ] || return 1
+    bchk.pass bchk_activate: activating $(basename $1)
+    >/dev/null pushd $insitu
+    source ./activate
+    >/dev/null popd
 }
 
-main () {
-    export BCHK_ROOT=$(dirname ${PWD})
-    export BCHK_APPS=${BCHK_ROOT}/apps
-    export BCHK_NAME=bchk
-    export BCHK_LBIN=${HOME}/.local/bin
+export BCHK_ROOT=$(dirname ${PWD})
+export BCHK_APPS=${BCHK_ROOT}/apps
+export BCHK_NAME=bchk
+export BCHK_LBIN=${HOME}/.local/bin
 
-    which .hackbin > /dev/null || { 
-        export PATH=${PATH}:${BCHK_ROOT} ;
-        export PATH=${PATH}:${BCHK_ROOT}/bin ; 
-    }
-
-    for app in $(ls ${BCHK_APPS}); do
-        __bchk_activate_app ${BCHK_APPS}/${app}
-    done
-
+which .hackbin > /dev/null || {
+    export PATH=${PATH}:${BCHK_ROOT}
+    export PATH=${PATH}:${BCHK_ROOT}/bin
 }
 
-main
+for name in $(ls ${BCHK_APPS}); do
+    bchk_activate ${BCHK_APPS}/${name}
+done
+
