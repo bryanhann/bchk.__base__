@@ -28,12 +28,3 @@ main () {
 }
 
 main
-
-bchk_pass () { 
-    echo "$(tput bold)$(tput setaf 15)$(tput setab 2)  PASS  $(tput sgr0) $*" >&2; 
-    return 0
-}
-bchk_fail () { 
-    echo "$(tput bold)$(tput setaf 15)$(tput setab 1)  FAIL  $(tput sgr0) $*" >&2; 
-    return 0
-}
