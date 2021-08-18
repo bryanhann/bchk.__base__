@@ -1,0 +1,8 @@
+#!/bin/bash
+
+msg="drop: assert: [\$BCHK_CFG_DROP_BOX] == [$BCHK_CFG_DROP_BOX] is a folder"
+[   -d "${BCHK_CFG_DROP_BOX}" ] && { bchk.pass $msg ; exit 0 ; }
+[   -d "${BCHK_CFG_DROP_BOX}" ] && { bchk.fail $msg ; exit 1 ; }
+
+
+

@@ -1,1 +1,2 @@
-ls ${BCH_GOO_DRIVE}/sync
+bchk drop check || exit
+ls ${BCHK_CFG_DROP_BOX}

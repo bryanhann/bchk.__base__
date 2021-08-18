@@ -1,2 +1,7 @@
 #!/bin/bash
+[ "$1" == "" ] && {
+    bchk help drop
+    bchk drop check
+    exit
+}
 arf-doit $0 $*
