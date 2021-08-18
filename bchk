@@ -1,5 +1,4 @@
 #!/bin/bash
-which .hackbin > /dev/null || { export PATH=${PATH}:${BCHK_ROOT}/bin ; }
 
 case .${1} in
     .|.-h|.--help|.help)
