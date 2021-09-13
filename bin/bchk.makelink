@@ -1,0 +1,17 @@
+#!/bin/sh
+
+makelink () {
+    export_ () { export $1="$2";  }
+    export_ link $1
+    export_ new_target "$2"
+    export_ old_target "$(bch9-realpath.sh ${link})"
+    [ "${old_target}" = "${new_target}" ] && bchk.pass link "$link" ok. && return
+    bchk.info "makelink: link:       [$link]"
+    bchk.info "makelink: old_target: [$old_target]"
+    bchk.info "makelink: new_target: [$new_target]"
+    [ -e $link  ] && rm ${link}
+    ln -s "${new_target}" $link
+}
+
+makelink $1 $2
+
