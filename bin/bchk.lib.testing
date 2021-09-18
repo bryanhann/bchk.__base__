@@ -1,0 +1,5 @@
+#!/bin/bash
+source bchk.lib.colors
+
+assert_equal () { [ "$1" = "$2" ] && green " pass " || red " fail " ; echo " assert [$1] is [$2]" ; }
+

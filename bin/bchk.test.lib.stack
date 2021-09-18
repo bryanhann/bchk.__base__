@@ -1,0 +1,31 @@
+#!/bin/bash
+source bchk.lib.stack
+source bchk.lib.testing
+
+test_stack () {
+    export __STACK__='hello'
+    CLEAR       ;   assert_equal    "$__STACK__"   ""
+    PUSH apple  ;   assert_equal    "$__STACK__"    "apple"
+    PUSH banana ;   assert_equal    "$__STACK__"    "banana apple"
+    POP         ;   assert_equal    "$__STACK__"    "apple"
+    POP         ;   assert_equal    "$__STACK__"    ""
+    POP         ;   assert_equal    "$__STACK__"    ""
+    CLEAR       ;   assert_equal "$(PEEK)"  ""
+    PUSH apple  ;   assert_equal "$(PEEK)" "apple"
+    PUSH banana ;   assert_equal "$(PEEK)" "banana"
+    PUSH carrot ;   assert_equal "$(PEEK)" "carrot"
+    true        ;   assert_equal "$(PEEK)" "carrot"
+    POP         ;   assert_equal "$(PEEK)" "banana"
+    POP         ;   assert_equal "$(PEEK)" "apple"
+    POP         ;   assert_equal "$(PEEK)" ""
+    POP         ;   assert_equal "$(PEEK)" ""
+    return
+
+    POP
+    assert_equal    "$__STACK__"    "apple"
+    POP
+    assert_equal    "$__STACK__"    ""
+    assert_equal    "$(PEEK)"       ""
+}
+
+test_stack

@@ -1,0 +1,8 @@
+#!/bin/bash
+_exportall () { var=$1 ; shift ; export ${var}="$*" ; }
+CLEAR ()    { _exportall  __STACK__                     ; }
+PUSH ()     { _exportall  __STACK__  ${1} ${__STACK__}  ; }
+PEEK ()     { echo $(__head__ ${__STACK__}) ; }
+POP () { _exportall __STACK__ $(__tail__ ${__STACK__}) ; }
+__head__ () { echo $1 ; }
+__tail__ () { shift ; echo $* ; }
