@@ -1,7 +1,5 @@
 #!/do/not/exec/sh
 
-echo SOURCING $PWD/activate
-
 bchk_activate () {
     insitu=${1}/.insitu
     [ -d ${insitu} ] || return 1
