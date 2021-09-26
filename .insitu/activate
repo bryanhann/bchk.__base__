@@ -3,7 +3,7 @@
 bchk_activate () {
     insitu=${1}/.insitu
     [ -d ${insitu} ] || return 1
-    bchk.pass bchk_activate: activating $(basename $1)
+    echo "            activating ./apps/$name"
     >/dev/null pushd $insitu
     source ./activate
     >/dev/null popd
