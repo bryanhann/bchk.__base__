@@ -1,4 +1,3 @@
 #/do/not/eval/sh
 
 export BCHK_APP_DROP_ROOT=$(dirname ${PWD})
-bchk.info [$PWD/activate]: hello.
